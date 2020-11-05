@@ -11,8 +11,7 @@ export function update() {
     for (let i = snakeBody.length - 2; i >= 0; i--) {
         snakeBody[i + 1] = { ...snakeBody[i] }
     }
-    //הוספת x או y 
-    //לפני לחיצת משתמש 
+   
     snakeBody[0].x += inputDirection.x
     snakeBody[0].y += inputDirection.y
 
