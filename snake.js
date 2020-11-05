@@ -1,16 +1,12 @@
 import { getInputDirection } from "./input.js"
 
-export const SNAKE_SPEED = 20 //מהירות המשחק 
-export const snakeBody = [{ x: 11, y: 11 }] //נקודת התחלת משחק כרגע באמצע  
+export const SNAKE_SPEED = 20 
+export const snakeBody = [{ x: 11, y: 11 }] 
 let newSegments = 0
 
 export function update() {
-    addSegments()//הוספת חוליה לנחש לאחר אכילה 
-
-
-
-    //אנו נקבע כאן את כיוון הנחש על ידי לחיצה על אחד החצים
-    //ואז הנחש ימשיך לכיוון הנבחר וכל שאר גוף הנחש ימשיך בכיוון הנבחר 
+    addSegments()
+ 
     const inputDirection = getInputDirection()
     for (let i = snakeBody.length - 2; i >= 0; i--) {
         snakeBody[i + 1] = { ...snakeBody[i] }
@@ -22,26 +18,23 @@ export function update() {
 
 }
 
-export function draw(gameBoard) { //הצגה ויזואלית על לוח המסך הנמצא ב html
+export function draw(gameBoard) {
     snakeBody.forEach(segment => {
-        //אנו ניצור אלמנט חדש שייצג את הנחש שלנו
-        // האלמנט שייצג את הנחש יהיה דייב רגיל
-        //נגדיר לו מיקום
-        //נוסיף לו עיצוב של הנחש על ידי הוספת קלאסלייסט של הנחש
-        //ואז נדאג שלוח המשחק יכייל את האלמנט שיצרנו שהוא בעצם הנחש 
-        const snakeElement = document.createElement('div')//יצירת דיב
-        snakeElement.style.gridRowStart = segment.y//מיקום ראשוני בעזרת הגריד 
-        snakeElement.style.gridColumnStart = segment.x//מיקום ראשוני בעזרת הגריד 
-        snakeElement.classList.add('snake')//הוספת עיצוב הנחש לאלמנט
+     
+        
+        const snakeElement = document.createElement('div')
+        snakeElement.style.gridRowStart = segment.y
+        snakeElement.style.gridColumnStart = segment.x
+        snakeElement.classList.add('snake')
         gameBoard.appendChild(snakeElement)
     })
 }
 
-function equalPositions(pos1, pos2) { //השוואה בין נקודות 
+function equalPositions(pos1, pos2) { 
     return pos1.x === pos2.x && pos1.y === pos2.y
 }
 
-function addSegments() { //הגדלת הנחש
+function addSegments() {
     for (let i = 0; i < newSegments; i++) {
         snakeBody.push({ ...snakeBody[snakeBody.length - 1] })
     }
